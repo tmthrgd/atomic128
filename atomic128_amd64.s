@@ -17,8 +17,7 @@ TEXT ·SwapUint128(SB),NOSPLIT,$0
 	MOVQ new+16(FP), CX
 loop:
 	LOCK
-	// CMPXCHG16B (BP)
-	BYTE $0x48; BYTE $0x0f; BYTE $0xc7; BYTE $0x4d; BYTE $0x00
+	CMPXCHG16B (BP)
 	JNE loop
 	MOVQ AX, old+24(FP)
 	MOVQ DX, old+32(FP)
@@ -31,8 +30,7 @@ TEXT ·CompareAndSwapUint128(SB),NOSPLIT,$0
 	MOVQ new+24(FP), BX
 	MOVQ new+32(FP), CX
 	LOCK
-	// CMPXCHG16B (BP)
-	BYTE $0x48; BYTE $0x0f; BYTE $0xc7; BYTE $0x4d; BYTE $0x00
+	CMPXCHG16B (BP)
 	SETEQ swapped+40(FP)
 	RET
 
@@ -43,8 +41,7 @@ TEXT ·LoadUint128(SB),NOSPLIT,$0
 	XORQ BX, BX
 	XORQ CX, CX
 	LOCK
-	// CMPXCHG16B (BP)
-	BYTE $0x48; BYTE $0x0f; BYTE $0xc7; BYTE $0x4d; BYTE $0x00
+	CMPXCHG16B (BP)
 	MOVQ AX, val+8(FP)
 	MOVQ DX, val+16(FP)
 	RET
@@ -57,8 +54,7 @@ TEXT ·StoreUint128(SB),NOSPLIT,$0
 	MOVQ new+16(FP), CX
 loop:
 	LOCK
-	// CMPXCHG16B (BP)
-	BYTE $0x48; BYTE $0x0f; BYTE $0xc7; BYTE $0x4d; BYTE $0x00
+	CMPXCHG16B (BP)
 	JNE loop
 	RET
 
