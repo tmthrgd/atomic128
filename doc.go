@@ -3,8 +3,6 @@
 // Modified BSD License that can be found in
 // the LICENSE file.
 
-//go:generate go run asm_gen.go
-
 package atomic128
 
 import (
